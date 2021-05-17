@@ -8,5 +8,7 @@
 import Foundation
 
 final class GithubProfileViewModel {
-    
+    func fetchProfile() {
+        debugPrint("fetching")
+    }
 }

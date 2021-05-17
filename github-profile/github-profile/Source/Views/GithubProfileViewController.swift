@@ -11,7 +11,8 @@ class GithubProfileViewController: UIViewController {
     
     // MARK: Properties
     
-    
+    @IBOutlet var fetchButton: UIButton!
+    private let viewModel = GithubProfileViewModel()
     
     // MARK: Lifecycle
 
@@ -20,4 +21,8 @@ class GithubProfileViewController: UIViewController {
     }
     
     // MARK: Actions
+    
+    @IBAction func fetchProfile(_ sender: UIButton) {
+        viewModel.fetchProfile()
+    }
 }
