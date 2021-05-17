@@ -10,7 +10,7 @@ import UIKit
 struct UserViewModel {
     let name: String
     let location: String?
-    let avatar: UIImage?
+    let avatar: UIImage
     let repositoriesCount: Int
     let blog: String?
     let company: String?
