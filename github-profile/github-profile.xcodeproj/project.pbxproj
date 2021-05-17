@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A017D612652024D00CCD08D /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A017D602652024D00CCD08D /* UserViewModel.swift */; };
 		5A3A9D382651DC240080618C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3A9D372651DC240080618C /* AppDelegate.swift */; };
 		5A3A9D3A2651DC240080618C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3A9D392651DC240080618C /* SceneDelegate.swift */; };
 		5A3A9D3C2651DC240080618C /* GithubProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3A9D3B2651DC240080618C /* GithubProfileViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A017D602652024D00CCD08D /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		5A3A9D342651DC240080618C /* github-profile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-profile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A3A9D372651DC240080618C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5A3A9D392651DC240080618C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				5AE94A6B2651DF4C001BA60A /* GithubProfileViewModel.swift */,
+				5A017D602652024D00CCD08D /* UserViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				5AE94A7B2651E038001BA60A /* User.swift in Sources */,
 				5AE94A782651E010001BA60A /* ImageFetcher.swift in Sources */,
 				5AE94A6C2651DF4D001BA60A /* GithubProfileViewModel.swift in Sources */,
+				5A017D612652024D00CCD08D /* UserViewModel.swift in Sources */,
 				5AE94A742651DFD9001BA60A /* GithubProfileService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
