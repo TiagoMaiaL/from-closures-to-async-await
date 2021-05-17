@@ -8,7 +8,16 @@
 import Foundation
 
 final class GithubProfileViewModel {
+    
+    // MARK: Properties
+    
+    private let service = GithubProfileService()
+    
+    // MARK: Public API
+    
     func fetchProfile() {
-        debugPrint("fetching")
+        service.fetchProfile { result in
+            // TODO: Update the displayable values here.
+        }
     }
 }
