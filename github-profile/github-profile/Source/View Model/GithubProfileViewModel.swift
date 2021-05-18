@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 final class GithubProfileViewModel {
     
@@ -15,21 +14,22 @@ final class GithubProfileViewModel {
     private let service = GithubProfileService()
     
     private let imageFetcher = ImageFetcher()
-    
-    @Published
-    private(set) var userViewModel: UserViewModel? = nil
-    
+        
     // MARK: Public API
     
-    func fetchProfile() {
+    func fetchProfile(completionHandler: @escaping (UserViewModel) -> Void) {
         service.fetchProfile { [weak self] result in
             switch result {
             case .success(let user):
                 self?.fetchUserAvatar(at: user.avatarUrl) { [weak self] avatarResult in
+                    guard let self = self else {
+                        return
+                    }
+                    
                     switch avatarResult {
                     case .success(let image):
                         DispatchQueue.main.async {
-                            self?.userViewModel = self?.makeUserViewModel(user: user, avatar: image)
+                            completionHandler(self.makeUserViewModel(user: user, avatar: image))
                         }
                     case .failure:
                         debugPrint("Failed fetching avatar")

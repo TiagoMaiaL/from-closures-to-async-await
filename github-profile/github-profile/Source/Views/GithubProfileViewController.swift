@@ -11,18 +11,23 @@ class GithubProfileViewController: UIViewController {
     
     // MARK: Properties
     
-    @IBOutlet var fetchButton: UIButton!
     private let viewModel = GithubProfileViewModel()
     
     // MARK: Lifecycle
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        fetchProfile()
     }
     
-    // MARK: Actions
+    // MARK: Private methods
     
-    @IBAction func fetchProfile(_ sender: UIButton) {
-        viewModel.fetchProfile()
+    private func fetchProfile() {
+        // TODO: Display loading
+        viewModel.fetchProfile { userViewModel in
+            // TODO: Hide loading
+            // TODO: Display user info
+            debugPrint(userViewModel)
+        }
     }
 }
