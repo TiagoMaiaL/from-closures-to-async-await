@@ -11,10 +11,24 @@ class GithubProfileViewController: UIViewController {
     
     // MARK: Properties
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var profileContainerStack: UIStackView!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var usernameLabel: UILabel!
+    @IBOutlet private var avatarImageView: UIImageView!
+    @IBOutlet private var bioLabel: UILabel!
+    @IBOutlet private var locationLabel: UILabel!
+    @IBOutlet private var companyLabel: UILabel!
+    @IBOutlet private var blogLabel: UILabel!
+    @IBOutlet private var repositoriesCountLabel: UILabel!
+    
     private let viewModel = GithubProfileViewModel()
     
     // MARK: Lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -23,10 +37,17 @@ class GithubProfileViewController: UIViewController {
     
     // MARK: Private methods
     
+    private func setup() {
+        profileContainerStack.isHidden = true
+    }
+    
     private func fetchProfile() {
         activityIndicator.startAnimating()
+        profileContainerStack.isHidden = true
+        
         viewModel.fetchProfile { [weak self] userViewModel in
             self?.activityIndicator.stopAnimating()
+            self?.profileContainerStack.isHidden = false
             debugPrint(userViewModel)
         }
     }

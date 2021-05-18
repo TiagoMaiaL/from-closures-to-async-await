@@ -89,6 +89,14 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="FRu-B6-6qv" id="ub5-vC-FD2"/>
+                        <outlet property="avatarImageView" destination="tO2-Er-jYb" id="TWo-Ys-rem"/>
+                        <outlet property="bioLabel" destination="Did-nI-PNv" id="Zoq-B1-D6K"/>
+                        <outlet property="blogLabel" destination="bYi-DJ-mKg" id="jmP-Oq-aAy"/>
+                        <outlet property="companyLabel" destination="24t-A3-ncX" id="QFI-6S-QVx"/>
+                        <outlet property="locationLabel" destination="ZXy-Ld-lzL" id="nCR-PF-ned"/>
+                        <outlet property="profileContainerStack" destination="pom-ed-gRN" id="ghT-PM-qv5"/>
+                        <outlet property="repositoriesCountLabel" destination="KSo-5w-lUm" id="Iv1-4l-bd9"/>
+                        <outlet property="usernameLabel" destination="2G9-1b-pNY" id="WI0-9h-n1E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
