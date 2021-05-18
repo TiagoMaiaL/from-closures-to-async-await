@@ -14,7 +14,7 @@ final class GithubProfileService {
     private enum Constants {
         static let rootGithubEndpoint = "https://api.github.com"
         static let usersGithubPath = "/users"
-        static let sampleUser = "octocat"
+        static let sampleUser = "Simbeul"
     }
     
     // MARK: Properties

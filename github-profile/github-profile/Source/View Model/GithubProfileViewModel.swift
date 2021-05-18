@@ -17,7 +17,7 @@ final class GithubProfileViewModel {
         
     // MARK: Public API
     
-    func fetchProfile(completionHandler: @escaping (UserViewModel) -> Void) {
+    func fetchProfile(completionHandler: @escaping (Result<UserViewModel, Error>) -> Void) {
         service.fetchProfile { [weak self] result in
             switch result {
             case .success(let user):
@@ -29,14 +29,16 @@ final class GithubProfileViewModel {
                     switch avatarResult {
                     case .success(let image):
                         DispatchQueue.main.async {
-                            completionHandler(self.makeUserViewModel(user: user, avatar: image))
+                            completionHandler(.success(self.makeUserViewModel(user: user, avatar: image)))
                         }
-                    case .failure:
+                    case .failure(let error):
                         debugPrint("Failed fetching avatar")
+                        completionHandler(.failure(error))
                     }
                 }
-            case .failure:
+            case .failure(let error):
                 debugPrint("Failed fetching user")
+                completionHandler(.failure(error))
             }
         }
     }
