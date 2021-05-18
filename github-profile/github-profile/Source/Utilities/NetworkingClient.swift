@@ -22,9 +22,13 @@ final class NetworkingClient {
                 return
             }
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  (200...299).contains(httpResponse.statusCode) else {
+            guard let httpResponse = response as? HTTPURLResponse else {
                 completionHandler(.failure(.unknown))
+                return
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                completionHandler(.failure(.responseError(httpResponse)))
                 return
             }
             
@@ -40,6 +44,7 @@ final class NetworkingClient {
 extension NetworkingClient {
     enum Error: Swift.Error {
         case connectionFailure
+        case responseError(_ response: HTTPURLResponse)
         case unknown
     }
 }

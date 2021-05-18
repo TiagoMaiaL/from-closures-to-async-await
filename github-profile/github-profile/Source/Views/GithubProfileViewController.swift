@@ -55,7 +55,7 @@ class GithubProfileViewController: UIViewController {
     private func display(_ user: UserViewModel) {
         usernameLabel.text = user.name
         avatarImageView.image = user.avatar
-        repositoriesCountLabel.text = "\(user.repositoriesCount) \(user.repositoriesCount == 1 ? "repository" : "repositories")"
+        repositoriesCountLabel.text = user.repositoriesCountText
         
         bioLabel.isHidden = user.bio == nil
         bioLabel.text = user.bio

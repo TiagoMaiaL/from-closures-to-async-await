@@ -15,4 +15,7 @@ struct UserViewModel {
     let blog: String?
     let company: String?
     let bio: String?
+    var repositoriesCountText: String {
+        "\(repositoriesCount) \(repositoriesCount == 1 ? "repository" : "repositories")"
+    }
 }
