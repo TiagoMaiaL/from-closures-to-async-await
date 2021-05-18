@@ -48,7 +48,25 @@ class GithubProfileViewController: UIViewController {
         viewModel.fetchProfile { [weak self] userViewModel in
             self?.activityIndicator.stopAnimating()
             self?.profileContainerStack.isHidden = false
-            debugPrint(userViewModel)
+            self?.display(userViewModel)
         }
+    }
+    
+    private func display(_ user: UserViewModel) {
+        usernameLabel.text = user.name
+        avatarImageView.image = user.avatar
+        repositoriesCountLabel.text = "\(user.repositoriesCount) \(user.repositoriesCount == 1 ? "repository" : "repositories")"
+        
+        bioLabel.isHidden = user.bio == nil
+        bioLabel.text = user.bio
+        
+        locationLabel.isHidden = user.location == nil
+        locationLabel.text = user.location
+        
+        companyLabel.isHidden = user.company == nil
+        companyLabel.text = user.company
+        
+        blogLabel.isHidden = user.blog == nil
+        blogLabel.text = user.blog
     }
 }
