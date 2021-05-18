@@ -46,15 +46,17 @@ class GithubProfileViewController: UIViewController {
         profileContainerStack.isHidden = true
         
         viewModel.fetchProfile { [weak self] result in
-            self?.activityIndicator.stopAnimating()
-            
-            switch result {
-            case .success(let user):
-                self?.profileContainerStack.isHidden = false
-                self?.display(user)
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
                 
-            case .failure:
-                break
+                switch result {
+                case .success(let user):
+                    self?.profileContainerStack.isHidden = false
+                    self?.display(user)
+                    
+                case .failure:
+                    break
+                }
             }
         }
     }

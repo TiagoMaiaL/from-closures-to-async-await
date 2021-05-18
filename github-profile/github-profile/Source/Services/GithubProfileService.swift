@@ -48,6 +48,7 @@ final class GithubProfileService {
                     let user = try self.parseToUser(data)
                     completionHandler(.success(user))
                 } catch {
+                    debugPrint(error)
                     completionHandler(.failure(.parsingFailure))
                 }
                 
