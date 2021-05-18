@@ -11,6 +11,7 @@ class GithubProfileViewController: UIViewController {
     
     // MARK: Properties
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     private let viewModel = GithubProfileViewModel()
     
     // MARK: Lifecycle
@@ -23,10 +24,9 @@ class GithubProfileViewController: UIViewController {
     // MARK: Private methods
     
     private func fetchProfile() {
-        // TODO: Display loading
-        viewModel.fetchProfile { userViewModel in
-            // TODO: Hide loading
-            // TODO: Display user info
+        activityIndicator.startAnimating()
+        viewModel.fetchProfile { [weak self] userViewModel in
+            self?.activityIndicator.stopAnimating()
             debugPrint(userViewModel)
         }
     }
