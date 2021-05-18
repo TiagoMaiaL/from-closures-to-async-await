@@ -8,11 +8,12 @@
 import Foundation
 
 struct User: Codable {
-    let name: String
+    let login: String
+    let name: String?
     let location: String?
     let avatarUrl: URL?
     let publicRepositoriesCount: Int
-    let blog: URL?
+    let blog: String?
     let company: String?
     let bio: String?
     
@@ -20,6 +21,7 @@ struct User: Codable {
         case avatarUrl = "avatar_url"
         case publicRepositoriesCount = "public_repos"
         
+        case login
         case name
         case location
         case blog

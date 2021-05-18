@@ -18,4 +18,14 @@ struct UserViewModel {
     var repositoriesCountText: String {
         "\(repositoriesCount) \(repositoriesCount == 1 ? "repository" : "repositories")"
     }
+    
+    init(_ user: User, avatar: UIImage) {
+        self.avatar = avatar
+        name = user.name ?? user.login
+        location = user.login
+        repositoriesCount = user.publicRepositoriesCount
+        blog = user.blog
+        company = user.company
+        bio = user.bio
+    }
 }

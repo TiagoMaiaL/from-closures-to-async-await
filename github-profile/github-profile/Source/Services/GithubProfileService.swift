@@ -14,7 +14,7 @@ final class GithubProfileService {
     private enum Constants {
         static let rootGithubEndpoint = "https://api.github.com"
         static let usersGithubPath = "/users"
-        static let sampleUser = "Simbeul"
+        static let sampleUser = "octocat"
     }
     
     // MARK: Properties
@@ -48,6 +48,7 @@ final class GithubProfileService {
                     let user = try self.parseToUser(data)
                     completionHandler(.success(user))
                 } catch {
+                    debugPrint(error)
                     completionHandler(.failure(.parsingFailure))
                 }
                 

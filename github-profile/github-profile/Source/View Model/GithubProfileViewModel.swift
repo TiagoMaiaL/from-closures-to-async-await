@@ -21,16 +21,11 @@ final class GithubProfileViewModel {
         service.fetchProfile { [weak self] result in
             switch result {
             case .success(let user):
-                self?.fetchUserAvatar(at: user.avatarUrl) { [weak self] avatarResult in
-                    guard let self = self else {
-                        return
-                    }
-                    
+                self?.fetchUserAvatar(at: user.avatarUrl) { avatarResult in
                     switch avatarResult {
                     case .success(let image):
-                        DispatchQueue.main.async {
-                            completionHandler(.success(self.makeUserViewModel(user: user, avatar: image)))
-                        }
+                        completionHandler(.success(UserViewModel(user, avatar: image)))
+                        
                     case .failure(let error):
                         debugPrint("Failed fetching avatar")
                         completionHandler(.failure(error))
@@ -50,17 +45,5 @@ final class GithubProfileViewModel {
         }
         
         imageFetcher.fetchImage(at: url, withCompletionHandler: completionHandler)
-    }
-    
-    private func makeUserViewModel(user: User, avatar: UIImage) -> UserViewModel {
-        UserViewModel(
-            name: user.name,
-            location: user.location,
-            avatar: avatar,
-            repositoriesCount: user.publicRepositoriesCount,
-            blog: user.blog?.absoluteString,
-            company: user.company,
-            bio: user.bio
-        )
     }
 }
