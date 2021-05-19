@@ -45,23 +45,22 @@ class GithubProfileViewController: UIViewController {
         activityIndicator.startAnimating()
         profileContainerStack.isHidden = true
         
-        viewModel.fetchProfile { [weak self] result in
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                
-                switch result {
-                case .success(let user):
-                    self?.profileContainerStack.isHidden = false
-                    self?.display(user)
-                    
-                case .failure:
-                    break
-                }
+        asyncDetached(priority: .userInitiated) {
+            do {
+                let user = try await viewModel.fetchProfile()
+                await display(user)
+            } catch {
+                // TODO: Display an error here, allow for a retry.
+                debugPrint(error)
             }
         }
     }
     
+    @MainActor
     private func display(_ user: UserViewModel) {
+        activityIndicator.stopAnimating()
+        profileContainerStack.isHidden = false
+        
         usernameLabel.text = user.name
         avatarImageView.image = user.avatar
         repositoriesCountLabel.text = user.repositoriesCountText
