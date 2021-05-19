@@ -18,7 +18,7 @@ final class ImageFetcher {
     
     func fetchImage(at url: URL, withCompletionHandler completionHandler: @escaping (Result<UIImage, AppError>) -> Void) {
         call?.cancel()
-        call = client.performHttpCall(url, completionHandler: { result in
+        call = client.performHttpCall(at: url, completionHandler: { result in
             switch result {
             case .success(let data):
                 guard let data = data else {

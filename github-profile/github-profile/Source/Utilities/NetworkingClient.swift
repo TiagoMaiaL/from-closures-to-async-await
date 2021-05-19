@@ -15,7 +15,15 @@ final class NetworkingClient {
     
     // MARK: Public API
     
-    func performHttpCall(_ url: URL, completionHandler: @escaping (Result<Data?, AppError>) -> Void) -> CancellableCall {
+    func performHttpCall(at url: URL) async throws -> Data? {
+        try await withUnsafeThrowingContinuation { continuation in
+            // TODO: Allow for cancellation of data tasks.
+            // TODO: Use Task.withCancellationHandler
+            _ = performHttpCall(at: url) { continuation.resume(with: $0) }
+        }
+    }
+    
+    func performHttpCall(at url: URL, completionHandler: @escaping (Result<Data?, AppError>) -> Void) -> CancellableCall {
         let dataTask = session.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completionHandler(.failure(.connectionFailure))

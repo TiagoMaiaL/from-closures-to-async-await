@@ -32,7 +32,7 @@ final class GithubProfileService {
         }
         
         fetchCall?.cancel()
-        fetchCall = client.performHttpCall(url) { [weak self] result in
+        fetchCall = client.performHttpCall(at: url) { [weak self] result in
             guard let self = self else {
                 return
             }
