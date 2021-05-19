@@ -15,7 +15,7 @@ final class NetworkingClient {
     
     // MARK: Public API
     
-    func performHttpCall(_ url: URL, completionHandler: @escaping (Result<Data?, Error>) -> Void) -> CancellableCall {
+    func performHttpCall(_ url: URL, completionHandler: @escaping (Result<Data?, AppError>) -> Void) -> CancellableCall {
         let dataTask = session.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completionHandler(.failure(.connectionFailure))
@@ -28,7 +28,7 @@ final class NetworkingClient {
             }
             
             guard (200...299).contains(httpResponse.statusCode) else {
-                completionHandler(.failure(.responseError(httpResponse)))
+                completionHandler(.failure(.responseFailure(response: httpResponse)))
                 return
             }
             
@@ -38,14 +38,6 @@ final class NetworkingClient {
         dataTask.resume()
         
         return dataTask
-    }
-}
-
-extension NetworkingClient {
-    enum Error: Swift.Error {
-        case connectionFailure
-        case responseError(_ response: HTTPURLResponse)
-        case unknown
     }
 }
 

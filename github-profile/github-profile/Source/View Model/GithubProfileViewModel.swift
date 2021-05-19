@@ -17,11 +17,16 @@ final class GithubProfileViewModel {
         
     // MARK: Public API
     
-    func fetchProfile(completionHandler: @escaping (Result<UserViewModel, Error>) -> Void) {
+    func fetchProfile(completionHandler: @escaping (Result<UserViewModel, AppError>) -> Void) {
         service.fetchProfile { [weak self] result in
             switch result {
             case .success(let user):
-                self?.fetchUserAvatar(at: user.avatarUrl) { avatarResult in
+                guard let avatarUrl = user.avatarUrl else {
+                    completionHandler(.failure(.fetchFailure))
+                    return
+                }
+                
+                self?.imageFetcher.fetchImage(at: avatarUrl) { avatarResult in
                     switch avatarResult {
                     case .success(let image):
                         completionHandler(.success(UserViewModel(user, avatar: image)))
@@ -31,19 +36,11 @@ final class GithubProfileViewModel {
                         completionHandler(.failure(error))
                     }
                 }
+                
             case .failure(let error):
                 debugPrint("Failed fetching user")
                 completionHandler(.failure(error))
             }
         }
-    }
-    
-    private func fetchUserAvatar(at url: URL?, completionHandler: @escaping (Result<UIImage, ImageFetcher.Error>) -> Void) {
-        guard let url = url else {
-            completionHandler(.failure(ImageFetcher.Error.fetchFailure))
-            return
-        }
-        
-        imageFetcher.fetchImage(at: url, withCompletionHandler: completionHandler)
     }
 }

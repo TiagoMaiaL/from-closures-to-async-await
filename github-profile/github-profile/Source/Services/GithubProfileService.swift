@@ -24,7 +24,7 @@ final class GithubProfileService {
     
     // MARK: Public API
     
-    public func fetchProfile(completionHandler: @escaping (Result<User, Error>) -> Void) {
+    public func fetchProfile(completionHandler: @escaping (Result<User, AppError>) -> Void) {
         let userProfileEndpoint = "\(Constants.rootGithubEndpoint)\(Constants.usersGithubPath)/\(Constants.sampleUser)"
         
         guard let url = URL(string: userProfileEndpoint) else {
@@ -61,13 +61,5 @@ final class GithubProfileService {
     private func parseToUser(_ data: Data) throws -> User {
         let decoder = JSONDecoder()
         return try decoder.decode(User.self, from: data)
-    }
-}
-
-extension GithubProfileService {
-    enum Error: Swift.Error {
-        case emptyResponse
-        case fetchFailure
-        case parsingFailure
     }
 }
