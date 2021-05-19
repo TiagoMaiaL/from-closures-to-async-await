@@ -14,33 +14,18 @@ final class GithubProfileViewModel {
     private let service = GithubProfileService()
     
     private let imageFetcher = ImageFetcher()
-        
+    
     // MARK: Public API
     
-    func fetchProfile(completionHandler: @escaping (Result<UserViewModel, AppError>) -> Void) {
-        service.fetchProfile { [weak self] result in
-            switch result {
-            case .success(let user):
-                guard let avatarUrl = user.avatarUrl else {
-                    completionHandler(.failure(.fetchFailure))
-                    return
-                }
-                
-                self?.imageFetcher.fetchImage(at: avatarUrl) { avatarResult in
-                    switch avatarResult {
-                    case .success(let image):
-                        completionHandler(.success(UserViewModel(user, avatar: image)))
-                        
-                    case .failure(let error):
-                        debugPrint("Failed fetching avatar")
-                        completionHandler(.failure(error))
-                    }
-                }
-                
-            case .failure(let error):
-                debugPrint("Failed fetching user")
-                completionHandler(.failure(error))
-            }
+    func fetchProfile() async throws -> UserViewModel {
+        let user = try await service.fetchProfile()
+        
+        guard let avatarUrl = user.avatarUrl else {
+            // TODO: Figure out if the avatar url can be nil.
+            throw AppError.fetchFailure
         }
+        
+        let avatar = try await imageFetcher.fetchImage(at: avatarUrl)
+        return UserViewModel(user, avatar: avatar)
     }
 }

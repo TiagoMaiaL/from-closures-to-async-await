@@ -12,30 +12,18 @@ final class ImageFetcher {
     // MARK: Properties
     
     private let client = NetworkingClient()
-    private var call: CancellableCall?
     
     // MARK: Public API
     
-    func fetchImage(at url: URL, withCompletionHandler completionHandler: @escaping (Result<UIImage, AppError>) -> Void) {
-        call?.cancel()
-        call = client.performHttpCall(at: url, completionHandler: { result in
-            switch result {
-            case .success(let data):
-                guard let data = data else {
-                    completionHandler(.failure(.emptyResponse))
-                    return
-                }
-                
-                guard let image = UIImage(data: data) else {
-                    completionHandler(.failure(.parsingFailure))
-                    return
-                }
-                
-                completionHandler(.success(image))
-                
-            case .failure:
-                completionHandler(.failure(.fetchFailure))
-            }
-        })
+    func fetchImage(at url: URL) async throws -> UIImage {
+        guard let data = try await client.performHttpCall(at: url) else {
+            throw AppError.emptyResponse
+        }
+        
+        guard let image = UIImage(data: data) else {
+            throw AppError.parsingFailure
+        }
+        
+        return image
     }
 }
