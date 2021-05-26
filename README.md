@@ -6,6 +6,8 @@ A first look at how async/await works in Swift.
 
 This repository contains a very simple app that fetches a profile from Github. It was first implemented using the callback based URLSession, then it was refactored to use the new async/await features.
 
+<img src="./screenshots/github-profile-sample-app.png" width="250px" />
+
 ### Refactoring
 
 Once the repository is cloned, there are some tags with each step of this refactoring process:
