@@ -18,13 +18,7 @@ Once the repository is cloned, there are some tags with each step of this refact
 - `async-viewmodel-imagefetcher` -> turn the viewmodel and the imagefetcher methods into async functions
 - `async-call-from-controller` -> initiates the async from a non-async code
 
-## Using Toolchains
-
-As of now (may 25, 2021), the concurrency features are in development. Such features are available for experimentation. They can be accessed by the development toolchains, that are generated from the `main` swift branch.
-
-Here's the link to download the latest development toolchains: https://swift.org/download/#snapshots
-
-Note: most refactoring was done using a toolchain from 05-14-2021, however, the most recent commits to this repository will be using more up to date toolchains.
+Note: most refactoring was done using a toolchain from 05-14-2021, however, the most recent commits to this repository use the latest beta version of Xcode 13 (beta-4).
 
 ## Useful links:
 
