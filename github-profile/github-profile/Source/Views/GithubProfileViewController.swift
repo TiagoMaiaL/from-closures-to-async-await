@@ -6,22 +6,25 @@
 //
 
 import UIKit
+import Combine
 
 class GithubProfileViewController: UIViewController {
     
     // MARK: Properties
     
-    @IBOutlet private var profileContainerStack: UIStackView!
-    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet private var usernameLabel: UILabel!
-    @IBOutlet private var avatarImageView: UIImageView!
-    @IBOutlet private var bioLabel: UILabel!
-    @IBOutlet private var locationLabel: UILabel!
-    @IBOutlet private var companyLabel: UILabel!
-    @IBOutlet private var blogLabel: UILabel!
-    @IBOutlet private var repositoriesCountLabel: UILabel!
+    @IBOutlet private weak var profileContainerStack: UIStackView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var usernameLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var bioLabel: UILabel!
+    @IBOutlet private weak var locationLabel: UILabel!
+    @IBOutlet private weak var companyLabel: UILabel!
+    @IBOutlet private weak var blogLabel: UILabel!
+    @IBOutlet private weak var repositoriesCountLabel: UILabel!
     
     private let viewModel = GithubProfileViewModel()
+    
+    private var cancellables = Set<AnyCancellable>()
     
     // MARK: Lifecycle
     
@@ -39,24 +42,23 @@ class GithubProfileViewController: UIViewController {
     
     private func setup() {
         profileContainerStack.isHidden = true
+        
+        let cancellable = viewModel
+            .userSubject
+            .sink(receiveValue: { [weak self] userViewModel in
+                self?.display(userViewModel)
+            })
+        
+        cancellables.insert(cancellable)
     }
     
     private func fetchProfile() {
         activityIndicator.startAnimating()
         profileContainerStack.isHidden = true
         
-        asyncDetached(priority: .userInitiated) {
-            do {
-                let user = try await viewModel.fetchProfile()
-                await display(user)
-            } catch {
-                // TODO: Display an error here, allow for a retry.
-                debugPrint(error)
-            }
-        }
+        viewModel.fetchProfile()
     }
     
-    @MainActor
     private func display(_ user: UserViewModel) {
         activityIndicator.stopAnimating()
         profileContainerStack.isHidden = false

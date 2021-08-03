@@ -19,9 +19,6 @@ final class GithubProfileService {
     
     // MARK: Properties
     
-    private let client = NetworkingClient()
-    private var fetchCall: CancellableCall?
-    
     private var userProfileEndpoint: String {
         "\(Constants.rootGithubEndpoint)\(Constants.usersGithubPath)/\(Constants.sampleUser)"
     }
@@ -33,9 +30,7 @@ final class GithubProfileService {
             preconditionFailure("Malformed URL")
         }
         
-        guard let data = try await client.performHttpCall(at: url) else {
-            throw AppError.emptyResponse
-        }
+        let (data, _) = try await URLSession.shared.data(from: url)
         
         return try parseDataToUser(data)
     }

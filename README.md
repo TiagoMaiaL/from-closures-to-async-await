@@ -24,7 +24,7 @@ As of now (may 25, 2021), the concurrency features are in development. Such feat
 
 Here's the link to download the latest development toolchains: https://swift.org/download/#snapshots
 
-Note: most refactoring was done using a toolchain from May 05-14-2021, however, the most recent commits to this repository will be using more up to date toolchains.
+Note: most refactoring was done using a toolchain from 05-14-2021, however, the most recent commits to this repository will be using more up to date toolchains.
 
 ## Useful links:
 

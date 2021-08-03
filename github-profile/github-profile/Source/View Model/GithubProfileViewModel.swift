@@ -6,26 +6,44 @@
 //
 
 import UIKit
+import Combine
 
+@MainActor
 final class GithubProfileViewModel {
     
     // MARK: Properties
     
     private let service = GithubProfileService()
-    
     private let imageFetcher = ImageFetcher()
+    let userSubject = PassthroughSubject<UserViewModel, Never>()
+    var handle: Task<Void, Error>?
     
     // MARK: Public API
     
-    func fetchProfile() async throws -> UserViewModel {
-        let user = try await service.fetchProfile()
-        
-        guard let avatarUrl = user.avatarUrl else {
-            // TODO: Figure out if the avatar url can be nil.
-            throw AppError.fetchFailure
+    func fetchProfile() {
+        handle?.cancel()
+        handle = Task.detached(priority: .userInitiated) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            let user = try await self.service.fetchProfile()
+            
+            guard let avatarUrl = user.avatarUrl else {
+                throw AppError.fetchFailure
+            }
+            
+            let avatar = try await self.imageFetcher.fetchImage(at: avatarUrl)
+            
+            guard !Task.isCancelled else {
+                return
+            }
+            
+            await self.setForDisplay(UserViewModel(user, avatar: avatar))
         }
-        
-        let avatar = try await imageFetcher.fetchImage(at: avatarUrl)
-        return UserViewModel(user, avatar: avatar)
+    }
+    
+    func setForDisplay(_ viewModel: UserViewModel) {
+        userSubject.send(viewModel)
     }
 }

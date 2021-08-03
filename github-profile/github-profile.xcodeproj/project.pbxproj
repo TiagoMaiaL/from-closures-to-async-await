@@ -16,7 +16,6 @@
 		5A3A9D442651DC290080618C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A3A9D422651DC290080618C /* LaunchScreen.storyboard */; };
 		5ACD644C26549CBD005CA9CE /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACD644B26549CBD005CA9CE /* AppError.swift */; };
 		5AE94A6C2651DF4D001BA60A /* GithubProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE94A6B2651DF4C001BA60A /* GithubProfileViewModel.swift */; };
-		5AE94A712651DFC4001BA60A /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE94A702651DFC4001BA60A /* NetworkingClient.swift */; };
 		5AE94A742651DFD9001BA60A /* GithubProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE94A732651DFD9001BA60A /* GithubProfileService.swift */; };
 		5AE94A782651E010001BA60A /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE94A772651E010001BA60A /* ImageFetcher.swift */; };
 		5AE94A7B2651E038001BA60A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AE94A7A2651E038001BA60A /* User.swift */; };
@@ -34,7 +33,6 @@
 		5A3A9D452651DC290080618C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5ACD644B26549CBD005CA9CE /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		5AE94A6B2651DF4C001BA60A /* GithubProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubProfileViewModel.swift; sourceTree = "<group>"; };
-		5AE94A702651DFC4001BA60A /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
 		5AE94A732651DFD9001BA60A /* GithubProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubProfileService.swift; sourceTree = "<group>"; };
 		5AE94A772651E010001BA60A /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		5AE94A7A2651E038001BA60A /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 		5AE94A6F2651DF7B001BA60A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				5AE94A702651DFC4001BA60A /* NetworkingClient.swift */,
 				5AE94A772651E010001BA60A /* ImageFetcher.swift */,
 			);
 			path = Utilities;
@@ -231,7 +228,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A3A9D3C2651DC240080618C /* GithubProfileViewController.swift in Sources */,
-				5AE94A712651DFC4001BA60A /* NetworkingClient.swift in Sources */,
 				5ACD644C26549CBD005CA9CE /* AppError.swift in Sources */,
 				5A3A9D382651DC240080618C /* AppDelegate.swift in Sources */,
 				5A3A9D3A2651DC240080618C /* SceneDelegate.swift in Sources */,
