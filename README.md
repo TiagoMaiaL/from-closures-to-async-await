@@ -1,8 +1,9 @@
-# Exploring Async/Await
+# From swift closures to async/await
 
-A first look at how async/await works in Swift. 
+This is a first look at how async/await works in Swift. To experiment with structured concurrency, 
+this repository demonstrates how to refactor a closure based UIKit app to use async/await and Tasks instead.
 
-## About
+## About the app
 
 This repository contains a very simple app that fetches a profile from Github. It was first implemented using the callback based URLSession, then it was refactored to use the new async/await features.
 
