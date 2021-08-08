@@ -16,13 +16,13 @@ final class GithubProfileViewModel {
     private let service = GithubProfileService()
     private let imageFetcher = ImageFetcher()
     let userSubject = PassthroughSubject<UserViewModel, Never>()
-    var handle: Task<Void, Error>?
+    private var profileTask: Task<Void, Error>?
     
     // MARK: Public API
     
     func fetchProfile() {
-        handle?.cancel()
-        handle = Task.detached(priority: .userInitiated) { [weak self] in
+        profileTask?.cancel()
+        profileTask = Task.detached(priority: .userInitiated) { [weak self] in
             guard let self = self else {
                 return
             }

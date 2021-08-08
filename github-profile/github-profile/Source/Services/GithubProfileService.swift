@@ -25,7 +25,7 @@ final class GithubProfileService {
     
     // MARK: Public API
     
-    public func fetchProfile() async throws -> User {
+    func fetchProfile() async throws -> User {
         guard let url = URL(string: userProfileEndpoint) else {
             preconditionFailure("Malformed URL")
         }
